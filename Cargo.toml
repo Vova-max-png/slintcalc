@@ -2,6 +2,12 @@
 name = "slintcalc"
 version = "0.1.0"
 edition = "2021"
+authors = ["Cat"]
+description = "A little calculator"
+license = "MIT"
+documentation = "https://github.com/Vova-max-png/slintcalc"
+repository = "https://github.com/Vova-max-png/slintcalc"
+categories = ["Ui utility"]
 
 build = "src/build.rs"
 
