@@ -1,0 +1,105 @@
+export global CalcLogic {
+    callback button-pressed(string);
+}
+
+component button inherits TouchArea {
+    in property <string> text;
+    in property <brush> background: gray;
+
+    width: 70px;
+    height: 50px;
+
+    clicked => {CalcLogic.button-pressed(root.text);}
+
+    container := Rectangle {
+        width: parent.width;
+        height: parent.height;
+        background: background;
+        border-radius: 4px;
+        border-color: black;
+        border-width: 1px;
+        Text {
+            text: text;
+            font-size: parent.width - 56px;
+            vertical-alignment: center;
+            horizontal-alignment: center;
+        }
+
+        animate background { duration: 100ms; }
+    }
+
+    states [
+        pressed when root.pressed: {
+            container.background: #585858;
+            container.border-width: 1.5px;
+        }
+
+        hover when root.has-hover: {
+            container.background: #424242;
+        }
+    ]
+}
+
+export component MainWindow inherits Window {
+    in property <float> value;
+
+    title: "Calculator";
+    width: 300px;
+    height: 425px;
+
+    VerticalLayout {
+        width: parent.width;
+        height: parent.height;
+
+        HorizontalLayout {
+            width: parent.width;
+            padding-bottom: 5px;
+            padding-right: 20px;
+
+            Text {
+                height: 37%;
+                font-size: 50px;
+                text: "\{value}";
+                vertical-alignment: bottom;
+                horizontal-alignment: right;
+            }
+        }
+
+        GridLayout {
+            width: parent.width;
+            padding-left: 5px;
+            spacing: 3px;
+    
+            Row {
+                button {text: "%";}
+                button {text: "CE";}
+                button {text: "C";}
+                button {text: "Back"; background: #555555;}
+            }
+            Row {
+                button {text: "1";}
+                button {text: "2";}
+                button {text: "3";}
+                button {text: "+"; background: #555555;}
+            }
+            Row {
+                button {text: "4";}
+                button {text: "5";}
+                button {text: "6";}
+                button {text: "-"; background: #555555;}
+            }
+            Row {
+                button {text: "7";}
+                button {text: "8";}
+                button {text: "9";}
+                button {text: "*"; background: #555555;}
+            }
+            Row {
+                button {text: "0";}
+                button {text: ".";}
+                button {text: "=";}
+                button {text: "/"; background: #555555;}
+            }
+        }
+    }
+}
